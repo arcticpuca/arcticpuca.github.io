@@ -9,7 +9,7 @@ var map = new ol.Map({
 });
 
 //initial view - epsg:3857 coordinates if not "Match project CRS"
-map.getView().fit([-2366962.768544, -480815.783737, 19809957.299458, 14933060.065180], map.getSize());
+map.getView().fit([-3408510.525353, -496781.218832, 18768409.542649, 14917094.630085], map.getSize());
 
 ////small screen definition
     var hasTouchScreen = map.getViewport().classList.contains('ol-touch');
@@ -445,7 +445,56 @@ var bottomRightContainerDiv = document.getElementById('bottom-right-container')
 
 //title
 
+var Title = new ol.control.Control({
+    element: (() => {
+        var titleElement = document.createElement('div');
+        titleElement.className = 'top-left-title ol-control';
+        titleElement.innerHTML = '<h2 class="project-title">Archived NOTAMs: Educational Demo (NOT FOR FLIGHT)</h2>';
+        return titleElement;
+    })(),
+    target: 'top-left-container'
+});
+map.addControl(Title)
+    
 //abstract
+
+var Abstract = new ol.control.Control({
+    element: (() => {
+        var titleElement = document.createElement('div');
+        titleElement.className = 'bottom-left-abstract ol-control';
+        titleElement.id = 'abstract';
+
+        var linkElement = document.createElement('a');
+
+        if (800 > 240) {
+            linkElement.setAttribute("onmouseenter", "showAbstract()");
+            linkElement.setAttribute("onmouseleave", "hideAbstract()");
+            linkElement.innerHTML = 'i';
+
+            window.hideAbstract = function() {
+                linkElement.classList.add("project-abstract");
+                linkElement.classList.remove("project-abstract-uncollapsed");
+                linkElement.innerHTML = 'i';
+            }
+
+            window.showAbstract = function() {
+                linkElement.classList.remove("project-abstract");
+                linkElement.classList.add("project-abstract-uncollapsed");
+                linkElement.innerHTML = 'CRITICAL DISCLAIMER: This map displays NOTAM (Notice to Airmen) data exclusively for educational and demonstrative purposes. It is NOT based on live, real-time, or comprehensive information and is inherently incomplete. This map MUST NEVER be used for actual flight planning, operational decisions, navigation, or any aviation-related activities whatsoever.<br />The sole intent of this map is to illustrate a potential method for visualizing NOTAM data. For accurate, up-to-date, and legally binding Notice to Airmen (NOTAM) information, pilots and aviation professionals are always required to consult official, trusted government aviation authorities and their designated publications (e.g., AIPs, official NOTAM briefing systems). Your safety and the safety of others depend on using official sources.';
+            }
+
+            hideAbstract();
+        } else {
+            linkElement.classList.add("project-abstract-uncollapsed");
+            linkElement.innerHTML = 'CRITICAL DISCLAIMER: This map displays NOTAM (Notice to Airmen) data exclusively for educational and demonstrative purposes. It is NOT based on live, real-time, or comprehensive information and is inherently incomplete. This map MUST NEVER be used for actual flight planning, operational decisions, navigation, or any aviation-related activities whatsoever.<br />The sole intent of this map is to illustrate a potential method for visualizing NOTAM data. For accurate, up-to-date, and legally binding Notice to Airmen (NOTAM) information, pilots and aviation professionals are always required to consult official, trusted government aviation authorities and their designated publications (e.g., AIPs, official NOTAM briefing systems). Your safety and the safety of others depend on using official sources.';
+        }
+
+        titleElement.appendChild(linkElement);
+        return titleElement;
+    })(),
+    target: 'bottom-left-container'
+});
+map.addControl(Abstract);
 
 
 //geolocate
