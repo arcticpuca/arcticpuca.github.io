@@ -28,11 +28,11 @@
         }
         .ol-control > *:focus, .ol-control >*:hover {
             background-color: rgba(248, 248, 248, 0.7)!important;
-        }
+        } 
         .ol-control {
             background-color: rgba(255,255,255,.4) !important;
             padding: 2px !important;
-        }
+        } 
         </style>
 
         <style>
@@ -46,6 +46,7 @@
         <title>Archived NOTAMs: Educational Demo (NOT FOR FLIGHT)</title>
     </head>
     <body>
+	
         <div id="disclaimerModal" style="
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
@@ -108,13 +109,13 @@
         <script src="./resources/ol.js"></script>
         <script src="./resources/ol-layerswitcher.js"></script>
         <script src="resources/ol-geocoder.js"></script>
-        <script src="layers/G4Poly_1.js"></script><script src="layers/G4Lines_2.js"></script><script src="layers/G4Points_3.js"></script><script src="layers/G3Poly_4.js"></script><script src="layers/G3Lines_5.js"></script><script src="layers/G3Points_6.js"></script><script src="layers/G2Poly_7.js"></script><script src="layers/G2Lines_8.js"></script><script src="layers/G1Poly_9.js"></script><script src="layers/G1Lines_10.js"></script><script src="layers/G1Points_11.js"></script>
-        <script src="styles/G4Poly_1_style.js"></script><script src="styles/G4Lines_2_style.js"></script><script src="styles/G4Points_3_style.js"></script><script src="styles/G3Poly_4_style.js"></script><script src="styles/G3Lines_5_style.js"></script><script src="styles/G3Points_6_style.js"></script><script src="styles/G2Poly_7_style.js"></script><script src="styles/G2Lines_8_style.js"></script><script src="styles/G1Poly_9_style.js"></script><script src="styles/G1Lines_10_style.js"></script><script src="styles/G1Points_11_style.js"></script>
-        <script src="./layers/layers.js" type="text/javascript"></script>
+        <script src="layers/G4Poly_1.js"></script><script src="layers/G4Lines_2.js"></script><script src="layers/G4Points_3.js"></script><script src="layers/G3Poly_4.js"></script><script src="layers/G3Lines_5.js"></script><script src="layers/G3Points_6.js"></script><script src="layers/G2Poly_7.js"></script><script src="layers/G2Lines_8.js"></script><script src="layers/G2Points_9.js"></script><script src="layers/G1Poly_10.js"></script><script src="layers/G1Lines_11.js"></script>
+        <script src="styles/G4Poly_1_style.js"></script><script src="styles/G4Lines_2_style.js"></script><script src="styles/G4Points_3_style.js"></script><script src="styles/G3Poly_4_style.js"></script><script src="styles/G3Lines_5_style.js"></script><script src="styles/G3Points_6_style.js"></script><script src="styles/G2Poly_7_style.js"></script><script src="styles/G2Lines_8_style.js"></script><script src="styles/G2Points_9_style.js"></script><script src="styles/G1Poly_10_style.js"></script><script src="styles/G1Lines_11_style.js"></script>
+        <script src="./layers/layers.js" type="text/javascript"></script> 
         <script src="./resources/Autolinker.min.js"></script>
         <script src="./resources/qgis2web.js"></script>
-
-        <script>
+		
+		<script>
             document.addEventListener('DOMContentLoaded', function() {
                 // This targets the default 'i' (info) button that qgis2web uses for the abstract
                 var infoButton = document.querySelector('.ol-control-info button');
@@ -132,6 +133,7 @@
                     }
                 }
 
+                // --- Start of Snippet 2 to paste here ---
                 // Get the modal
                 var modal = document.getElementById('disclaimerModal');
                 // Get the button that closes the modal
@@ -151,7 +153,9 @@
                         modal.style.display = 'none';
                     }
                 }
+                // --- End of Snippet 2 ---
             });
         </script>
+
     </body>
 </html>
