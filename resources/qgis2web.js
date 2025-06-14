@@ -1,17 +1,15 @@
+
 var map = new ol.Map({
     target: 'map',
     renderer: 'canvas',
     layers: layersList,
     view: new ol.View({
-         maxZoom: 28, minZoom: 1, projection: new ol.proj.Projection({
-            code: 'EPSG:3857',
-            //extent: [-20037508.342789, -20037508.342789, 20037508.342789, 20037508.342789],
-            units: 'm'})
+         maxZoom: 28, minZoom: 1
     })
 });
 
 //initial view - epsg:3857 coordinates if not "Match project CRS"
-map.getView().fit([2977571.323165, 7959984.167714, 4374911.474806, 8931193.314433], map.getSize());
+map.getView().fit([-5203301.633879, -3070867.531495, 18473784.909808, 13385686.008374], map.getSize());
 
 ////small screen definition
     var hasTouchScreen = map.getViewport().classList.contains('ol-touch');
@@ -450,11 +448,11 @@ var bottomRightContainerDiv = document.getElementById('bottom-right-container')
 var Title = new ol.control.Control({
     element: (() => {
         var titleElement = document.createElement('div');
-        titleElement.className = 'top-left-title ol-control';
+        titleElement.className = 'bottom-right-title ol-control';
         titleElement.innerHTML = '<h2 class="project-title">Archived NOTAMs: Educational Demo (NOT FOR FLIGHT)</h2>';
         return titleElement;
     })(),
-    target: 'top-left-container'
+    target: 'bottom-right-container'
 });
 map.addControl(Title)
     
@@ -920,6 +918,7 @@ map.addControl(layerSwitcher);
 
 
 
+
 //attribution
 var bottomAttribution = new ol.control.Attribution({
   collapsible: false,
@@ -928,10 +927,15 @@ var bottomAttribution = new ol.control.Attribution({
 });
 map.addControl(bottomAttribution);
 
-//attribution
-var attributionControl = document.getElementsByClassName('bottom-attribution')[0];
-if (attributionControl) {
-    bottomRightContainerDiv.appendChild(attributionControl); // <--- CHANGED TO BOTTOM-RIGHT CONTAINER
+var attributionList = document.createElement('li');
+attributionList.innerHTML = `
+	<a href="https://github.com/qgis2web/qgis2web">qgis2web</a> &middot;
+	<a href="https://openlayers.org/">OpenLayers</a> &middot;
+	<a href="https://qgis.org/">QGIS</a>	
+`;
+var bottomAttributionUl = bottomAttribution.element.querySelector('ul');
+if (bottomAttributionUl) {
+  bottomAttribution.element.insertBefore(attributionList, bottomAttributionUl);
 }
 
 
@@ -956,7 +960,46 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 });
 
-// --- START OF SEARCH FUNCTIONALITY CODE ---
+
+//move controls inside containers, in order
+    //zoom
+    var zoomControl = document.getElementsByClassName('ol-zoom')[0];
+    if (zoomControl) {
+        topLeftContainerDiv.appendChild(zoomControl);
+    }
+    //geolocate
+    var geolocateControl = document.getElementsByClassName('geolocate')[0];
+    if (geolocateControl) {
+        topLeftContainerDiv.appendChild(geolocateControl);
+    }
+    //measure
+    var measureControl = document.getElementsByClassName('measure-control')[0];
+    if (measureControl) {
+        topLeftContainerDiv.appendChild(measureControl);
+    }
+    //geocoder
+    var geocoderControl = document.getElementsByClassName('ol-geocoder')[0];
+    if (geocoderControl) {
+        topLeftContainerDiv.appendChild(geocoderControl);
+    }
+    //search layer
+    var searchLayerControl = document.getElementsByClassName('search-layer')[0];
+    if (searchLayerControl) {
+        topLeftContainerDiv.appendChild(searchLayerControl);
+    }
+    //scale line
+    var scaleLineControl = document.getElementsByClassName('ol-scale-line')[0];
+    if (scaleLineControl) {
+        scaleLineControl.className += ' ol-control';
+        bottomLeftContainerDiv.appendChild(scaleLineControl);
+    }
+    //attribution
+    var attributionControl = document.getElementsByClassName('bottom-attribution')[0];
+    if (attributionControl) {
+        bottomRightContainerDiv.appendChild(attributionControl);
+    }
+	
+	// --- START OF SEARCH FUNCTIONALITY CODE ---
 
 // Get references to your search elements
 const searchInput = document.getElementById('notamSearch');
@@ -966,19 +1009,19 @@ const clearSearchButton = document.getElementById('clearSearch');
 // Define an array of your searchable NOTAM layers.
 // These are the layer variables defined in layers/layers.js
 const searchableNotamLayers = [
-    lyr_G5Poly_3,
-    lyr_G5Lines_4,
-    lyr_G5Points_5,
-    lyr_G4Poly_6,
-    lyr_G4Lines_7,
-    lyr_G4Points_8,
-    lyr_G3Poly_9,
-    lyr_G3Points_10,
-    lyr_G2Poly_11,
-    lyr_G2Lines_12,
-    lyr_G2Points_13,
-    lyr_G1Poly_14,
-    lyr_G1Lines_15
+    lyr_G5Poly_4,   // Corrected suffix
+    lyr_G5Lines_5,  // Corrected suffix
+    lyr_G5Points_6, // Corrected suffix
+    lyr_G4Poly_7,   // Corrected suffix
+    lyr_G4Lines_8,  // Corrected suffix
+    lyr_G4Points_9, // Corrected suffix
+    lyr_G3Poly_10,  // Corrected suffix
+    lyr_G3Points_11, // Corrected suffix
+    lyr_G2Poly_12,  // Corrected suffix
+    lyr_G2Lines_13, // Corrected suffix
+    lyr_G2Points_14, // Corrected suffix
+    lyr_G1Poly_15,  // Corrected suffix
+    lyr_G1Lines_16  // Corrected suffix
 ];
 
 // Store initial features for each source using a Map

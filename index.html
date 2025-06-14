@@ -5,220 +5,48 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="./resources/ol.css">
         <link rel="stylesheet" href="resources/fontawesome-all.min.css">
         <link href="resources/ol-geocoder.min.css" rel="stylesheet">
         <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
         <link rel="stylesheet" href="./resources/qgis2web.css">
+        <style>
+        html, body {
+            background-color: #ffffff;
+        }
+        .ol-control > * {
+            background-color: #f8f8f8!important;
+            color: #444444!important;
+            border-radius: 0px;
+        }
+        .ol-attribution a, .gcd-gl-input::placeholder, .search-layer-input-search::placeholder {
+            color: #444444!important;
+        }
+        .search-layer-input-search {
+            background-color: #f8f8f8!important;
+        }
+        .ol-control > *:focus, .ol-control >*:hover {
+            background-color: rgba(248, 248, 248, 0.7)!important;
+        } 
+        .ol-control {
+            background-color: rgba(255,255,255,.4) !important;
+            padding: 2px !important;
+        } 
+        </style>
 
         <style>
-            /* Essential: Ensure HTML, Body, and Map take full screen */
-            html, body, #map {
-                width: 100%;
-                height: 100%;
-                padding: 0;
-                margin: 0;
-                background-color: #ffffff; /* From your original style */
-                overflow: hidden; /* Prevent unwanted scrollbars */
-            }
-
-            /* General styling for OpenLayers controls (zoom buttons, etc.) */
-            .ol-control > * {
-                background-color: #f8f8f8!important;
-                color: #444444!important;
-                border-radius: 0px;
-            }
-            .ol-control > *:focus, .ol-control >*:hover {
-                background-color: rgba(248, 248, 248, 0.7)!important;
-            } 
-            .ol-control {
-                background-color: rgba(255,255,255,.4) !important;
-                padding: 2px !important;
-                pointer-events: auto; /* Re-enable interaction with the controls themselves */
-                margin: 5px; /* Add spacing between controls when stacked in containers */
-            } 
-
-            /* Styling for attribution links and search input placeholders */
-            .ol-attribution a, 
-            .gcd-gl-input::placeholder, 
-            .search-layer-input-search::placeholder {
-                color: #444444!important;
-            }
-
-            /* Styling for the search input box */
-            .search-layer-input-search {
-                background-color: #f8f8f8!important;
-                border: 1px solid #ccc; 
-                padding: 5px; 
-                border-radius: 3px; 
-            }
-
-            /* Base styles for all QGIS2Web generated control containers */
-            #top-left-container,
-            #bottom-left-container,
-            #top-right-container,
-            #bottom-right-container {
-                position: absolute; /* Position them relative to the map viewport */
-                z-index: 100; /* Ensure they are above the map layers */
-                display: flex; /* Use flexbox for internal control arrangement */
-                flex-direction: column; /* Stack controls vertically */
-                padding: 10px; /* Add some padding around the controls */
-                pointer-events: none; /* Allows clicks to pass through to map by default */
-            }
-
-            /* Specific positioning and alignment for each container */
-            #top-left-container {
-                top: 10px;
-                left: 10px;
-                align-items: flex-start; /* Align contents to the left */
-            }
-
-            #bottom-left-container {
-                bottom: 10px;
-                left: 10px;
-                align-items: flex-start; /* Align contents to the left */
-            }
-
-            #top-right-container {
-                top: 10px;
-                right: 10px;
-                align-items: flex-end; /* Align contents to the right */
-            }
-
-            #bottom-right-container {
-                bottom: 10px;
-                right: 10px;
-                align-items: flex-end; /* Align contents to the right */
-            }
-
-            /* Adjustments for custom title/abstract elements if they exist and are moved into containers */
-            .top-left-title, .bottom-left-abstract {
-                pointer-events: auto; /* Ensure interactivity */
-                margin: 5px; /* Add spacing */
-            }
-
-            /* Specific styling for the attribution links within their container */
-            .ol-attribution {
-                position: relative !important; /* Positioned relative to its flex parent */
-                bottom: auto !important; /* Remove old absolute positioning */
-                right: auto !important;  /* Remove old absolute positioning */
-                left: auto !important;   /* Remove old absolute positioning */
-                text-align: right !important; /* Align text to the right within the bottom-right container */
-                max-width: calc(100% - 10px) !important; /* Keep it from being too wide */
-                margin: 0; /* Reset margin, let parent .ol-control handle spacing */
-                padding: 0; /* Remove any padding that might conflict with container's padding */
-            }
-            /* Ensure the attribution lists and links are well-behaved */
-            .ol-attribution ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-            .ol-attribution li {
-                display: inline; /* Keep links inline */
-                margin: 0 2px; /* Small space between links */
-                white-space: nowrap; /* Prevent links from breaking */
-            }
-			/* Add or replace these rules inside your existing <style> block */
-
-         /* --- NEW/UPDATED CSS for Positioning & Clickability --- */
-
-        /* 1. Make the overall top-left container transparent to clicks */
-        #top-left-container {
-            pointer-events: none !important; /* ADD !important to force override the inline style */
-            z-index: 99; /* Keep it visually below other interactive elements */
-            /* Keep its default positioning (position: absolute, top: 0, left: 0) from qgis2web.js */
-        }
-
-        /* 2. Style for the 'Archived NOTAMs' title element */
-        .top-left-title {
-            pointer-events: none; /* Title text and background should also pass clicks through */
-            position: fixed; /* Fixed relative to the viewport */
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 102; /* Give it the highest z-index to ensure it's always visible on top */
-
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 5px 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        /* 3. Style for the actual H2 text within the title div (no change) */
-        .project-title {
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
             margin: 0;
-            font-size: 1.3em;
-            color: #333;
-            white-space: nowrap;
         }
-
-        /* 4. Adjust the position of the zoom controls and ensure they are clickable */
-        #top-left-container .ol-zoom {
-            top: 110px; /* Position relative to #top-left-container's top */
-            left: 10px; /* Position relative to #top-left-container's left */
-            z-index: 100; /* Ensure zoom controls are above the map but below the title */
-            pointer-events: auto; /* Explicitly make zoom buttons clickable */
-            position: absolute; /* Ensures top/left positioning works correctly within the container */
-        }
-        /* --- END of NEW/UPDATED CSS --- */
         </style>
         <title>Archived NOTAMs: Educational Demo (NOT FOR FLIGHT)</title>
     </head>
     <body>
-        
-        <div id="disclaimerModal" style="
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            display: flex; /* Use flexbox to center content */
-        ">
-            <div style="
-                background-color: #fefefe;
-                margin: auto; /* Centered with flexbox */
-                padding: 20px;
-                border: 1px solid #888;
-                width: 90%; /* Could be more or less, depending on screen size */
-                max-width: 600px; /* Max width for larger screens */
-                border-radius: 8px;
-                text-align: center;
-                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-                font-family: Arial, sans-serif;
-            ">
-                <h2 style="color: #d9534f;">Important Disclaimer!</h2>
-                <p style="font-size: 1.1em; line-height: 1.6;">
-                    The data presented on this map, referring to NOTAMs (Notice to Airmen / Notice to Air Missions), is <strong style="color: #d9534f;">NOT LIVE</strong> and is <strong style="color: #d9534f;">NOT for aviation or other planning purposes.</strong>
-                </p>
-                <p style="font-size: 1.1em; line-height: 1.6;">
-                    It is provided solely as an <strong style="color: #5cb85c;">educational tool</strong> to demonstrate one way of visualizing archived NOTAM data.
-                </p>
-                <p style="font-size: 1.1em; line-height: 1.6;">
-                    Always refer to official, live sources for flight planning and operational decisions.
-                </p>
-                <button id="closeDisclaimer" style="
-                    background-color: #007bff; /* Blue */
-                    color: white;
-                    padding: 10px 20px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    font-size: 1em;
-                    margin-top: 20px;
-                ">
-                    Acknowledge and Continue
-                </button>
-            </div>
-        </div>
-		<div style="position: absolute; top: 60px; left: 50%; transform: translateX(-50%); z-index: 100; background-color: white; padding: 10px; border-radius: 5px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);">
+		<div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 100; background-color: white; padding: 10px; border-radius: 5px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2); width: 20%;">
 			<input type="text" id="notamSearch" placeholder="Search NOTAMs (e.g., GPS/GNSS/DANGER/ROCKET)">
 			<button id="searchButton">Search</button>
 			<button id="clearSearch">Clear Search</button>
@@ -230,45 +58,14 @@
             </div>
         </div>
         <script src="resources/qgis2web_expressions.js"></script>
-        <script src="resources/proj4.js"></script>
-        <script>proj4.defs('EPSG:3857','+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs');</script>
         <script src="./resources/functions.js"></script>
         <script src="./resources/ol.js"></script>
         <script src="./resources/ol-layerswitcher.js"></script>
         <script src="resources/ol-geocoder.js"></script>
-        <script src="layers/G5Poly_3.js"></script><script src="layers/G5Lines_4.js"></script><script src="layers/G5Points_5.js"></script><script src="layers/G4Poly_6.js"></script><script src="layers/G4Lines_7.js"></script><script src="layers/G4Points_8.js"></script><script src="layers/G3Poly_9.js"></script><script src="layers/G3Points_10.js"></script><script src="layers/G2Poly_11.js"></script><script src="layers/G2Lines_12.js"></script><script src="layers/G2Points_13.js"></script><script src="layers/G1Poly_14.js"></script><script src="layers/G1Lines_15.js"></script>
-        <script src="styles/G5Poly_3_style.js"></script><script src="styles/G5Lines_4_style.js"></script><script src="styles/G5Points_5_style.js"></script><script src="styles/G4Poly_6_style.js"></script><script src="styles/G4Lines_7_style.js"></script><script src="styles/G4Points_8_style.js"></script><script src="styles/G3Poly_9_style.js"></script><script src="styles/G3Points_10_style.js"></script><script src="styles/G2Poly_11_style.js"></script><script src="styles/G2Lines_12_style.js"></script><script src="styles/G2Points_13_style.js"></script><script src="styles/G1Poly_14_style.js"></script><script src="styles/G1Lines_15_style.js"></script>
+        <script src="layers/G5Poly_4.js"></script><script src="layers/G5Lines_5.js"></script><script src="layers/G5Points_6.js"></script><script src="layers/G4Poly_7.js"></script><script src="layers/G4Lines_8.js"></script><script src="layers/G4Points_9.js"></script><script src="layers/G3Poly_10.js"></script><script src="layers/G3Points_11.js"></script><script src="layers/G2Poly_12.js"></script><script src="layers/G2Lines_13.js"></script><script src="layers/G2Points_14.js"></script><script src="layers/G1Poly_15.js"></script><script src="layers/G1Lines_16.js"></script>
+        <script src="styles/G5Poly_4_style.js"></script><script src="styles/G5Lines_5_style.js"></script><script src="styles/G5Points_6_style.js"></script><script src="styles/G4Poly_7_style.js"></script><script src="styles/G4Lines_8_style.js"></script><script src="styles/G4Points_9_style.js"></script><script src="styles/G3Poly_10_style.js"></script><script src="styles/G3Points_11_style.js"></script><script src="styles/G2Poly_12_style.js"></script><script src="styles/G2Lines_13_style.js"></script><script src="styles/G2Points_14_style.js"></script><script src="styles/G1Poly_15_style.js"></script><script src="styles/G1Lines_16_style.js"></script>
         <script src="./layers/layers.js" type="text/javascript"></script> 
         <script src="./resources/Autolinker.min.js"></script>
         <script src="./resources/qgis2web.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // This targets the default 'i' (info) button that qgis2web uses for the abstract
-                var infoButton = document.querySelector('.ol-control-info button');
-                if (infoButton) {
-                    infoButton.click(); // Programmatically click the info button
-                } else {
-                    // Fallback in case the button selector changes or is not found
-                    var abstractPanel = document.getElementById('info');
-                    if (abstractPanel) {
-                        abstractPanel.style.display = 'block';
-                    }
-                }
-
-                // Disclaimer modal JavaScript
-                var modal = document.getElementById('disclaimerModal');
-                var btn = document.getElementById('closeDisclaimer');
-                modal.style.display = 'flex'; 
-
-                btn.onclick = function() {
-                    modal.style.display = 'none';
-                }
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = 'none';
-                    }
-                }
-            });
-        </script>
     </body>
 </html>
