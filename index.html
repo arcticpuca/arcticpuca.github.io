@@ -46,7 +46,8 @@
         <title>Archived NOTAMs: Educational Demo (NOT FOR FLIGHT)</title>
     </head>
     <body>
-	        <div id="disclaimerModal" style="
+	
+		 <div id="disclaimerModal" style="
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
             z-index: 1000; /* Sit on top */
@@ -103,16 +104,18 @@
             </div>
         </div>
         <script src="resources/qgis2web_expressions.js"></script>
+<script src="resources/proj4.js"></script>
+        <script>proj4.defs('EPSG:3857','+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs');</script>
         <script src="./resources/functions.js"></script>
         <script src="./resources/ol.js"></script>
         <script src="./resources/ol-layerswitcher.js"></script>
         <script src="resources/ol-geocoder.js"></script>
-        <script src="layers/G5Poly_2.js"></script><script src="layers/G5Lines_3.js"></script><script src="layers/G5Points_4.js"></script><script src="layers/G4Poly_5.js"></script><script src="layers/G4Lines_6.js"></script><script src="layers/G4Points_7.js"></script><script src="layers/G3Poly_8.js"></script><script src="layers/G3Points_9.js"></script><script src="layers/G2Poly_10.js"></script><script src="layers/G2Lines_11.js"></script><script src="layers/G2Points_12.js"></script><script src="layers/G1Poly_13.js"></script><script src="layers/G1Lines_14.js"></script>
-        <script src="styles/G5Poly_2_style.js"></script><script src="styles/G5Lines_3_style.js"></script><script src="styles/G5Points_4_style.js"></script><script src="styles/G4Poly_5_style.js"></script><script src="styles/G4Lines_6_style.js"></script><script src="styles/G4Points_7_style.js"></script><script src="styles/G3Poly_8_style.js"></script><script src="styles/G3Points_9_style.js"></script><script src="styles/G2Poly_10_style.js"></script><script src="styles/G2Lines_11_style.js"></script><script src="styles/G2Points_12_style.js"></script><script src="styles/G1Poly_13_style.js"></script><script src="styles/G1Lines_14_style.js"></script>
+        <script src="layers/G5Poly_3.js"></script><script src="layers/G5Lines_4.js"></script><script src="layers/G5Points_5.js"></script><script src="layers/G4Poly_6.js"></script><script src="layers/G4Lines_7.js"></script><script src="layers/G4Points_8.js"></script><script src="layers/G3Poly_9.js"></script><script src="layers/G3Points_10.js"></script><script src="layers/G2Poly_11.js"></script><script src="layers/G2Lines_12.js"></script><script src="layers/G2Points_13.js"></script><script src="layers/G1Poly_14.js"></script><script src="layers/G1Lines_15.js"></script>
+        <script src="styles/G5Poly_3_style.js"></script><script src="styles/G5Lines_4_style.js"></script><script src="styles/G5Points_5_style.js"></script><script src="styles/G4Poly_6_style.js"></script><script src="styles/G4Lines_7_style.js"></script><script src="styles/G4Points_8_style.js"></script><script src="styles/G3Poly_9_style.js"></script><script src="styles/G3Points_10_style.js"></script><script src="styles/G2Poly_11_style.js"></script><script src="styles/G2Lines_12_style.js"></script><script src="styles/G2Points_13_style.js"></script><script src="styles/G1Poly_14_style.js"></script><script src="styles/G1Lines_15_style.js"></script>
         <script src="./layers/layers.js" type="text/javascript"></script> 
         <script src="./resources/Autolinker.min.js"></script>
         <script src="./resources/qgis2web.js"></script>
-				<script>
+		<script>
             document.addEventListener('DOMContentLoaded', function() {
                 // This targets the default 'i' (info) button that qgis2web uses for the abstract
                 var infoButton = document.querySelector('.ol-control-info button');
