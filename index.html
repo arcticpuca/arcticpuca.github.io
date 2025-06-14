@@ -46,6 +46,55 @@
         <title>Archived NOTAMs: Educational Demo (NOT FOR FLIGHT)</title>
     </head>
     <body>
+	 <div id="disclaimerModal" style="
+            display: flex; /* Changed to flex to make it visible initially for testing */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        ">
+            <div style="
+                background-color: #fefefe;
+                margin: auto; /* Centered with flexbox */
+                padding: 20px;
+                border: 1px solid #888;
+                width: 90%; /* Could be more or less, depending on screen size */
+                max-width: 600px; /* Max width for larger screens */
+                border-radius: 8px;
+                text-align: center;
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+                font-family: Arial, sans-serif;
+            ">
+                <h2 style="color: #d9534f;">Important Disclaimer!</h2>
+                <p style="font-size: 1.1em; line-height: 1.6;">
+                    The data presented on this map, referring to NOTAMs (Notice to Airmen / Notice to Air Missions), is <strong style="color: #d9534f;">NOT LIVE</strong> and is <strong style="color: #d9534f;">NOT for aviation or other planning purposes.</strong>
+                </p>
+                <p style="font-size: 1.1em; line-height: 1.6;">
+                    It is provided solely as an <strong style="color: #5cb85c;">educational tool</strong> to demonstrate one way of visualizing archived NOTAM data.
+                </p>
+                <p style="font-size: 1.1em; line-height: 1.6;">
+                    Always refer to official, live sources for flight planning and operational decisions.
+                </p>
+                <button id="closeDisclaimer" style="
+                    background-color: #007bff; /* Blue */
+                    color: white;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 1em;
+                    margin-top: 20px;
+                ">
+                    Acknowledge and Continue
+                </button>
+            </div>
+        </div>
 		<div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 100; background-color: white; padding: 10px; border-radius: 5px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2); width: 20%;">
 			<input type="text" id="notamSearch" placeholder="Search NOTAMs (e.g., GPS/GNSS/DANGER/ROCKET)">
 			<button id="searchButton">Search</button>
@@ -57,6 +106,33 @@
                 <div id="popup-content"></div>
             </div>
         </div>
+        <script>
+            // Get the modal and the button
+            var modal = document.getElementById("disclaimerModal");
+            var btn = document.getElementById("closeDisclaimer");
+
+            // When the user clicks the button, hide the modal
+            btn.onclick = function() {
+              modal.style.display = "none";
+            }
+
+            // Optional: If you want the disclaimer to show only once (e.g., using localStorage)
+            // You can uncomment and modify this part if needed.
+            /*
+            window.onload = function() {
+                if (localStorage.getItem("disclaimerShown") === "true") {
+                    modal.style.display = "none";
+                } else {
+                    modal.style.display = "flex"; // Ensure it's visible initially
+                }
+            };
+
+            btn.onclick = function() {
+                modal.style.display = "none";
+                localStorage.setItem("disclaimerShown", "true");
+            }
+            */
+        </script>
         <script src="resources/qgis2web_expressions.js"></script>
         <script src="./resources/functions.js"></script>
         <script src="./resources/ol.js"></script>
