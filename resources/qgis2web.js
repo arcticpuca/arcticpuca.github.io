@@ -1,4 +1,3 @@
-
 var map = new ol.Map({
     target: 'map',
     renderer: 'canvas',
@@ -921,7 +920,6 @@ map.addControl(layerSwitcher);
 
 
 
-
 //attribution
 var bottomAttribution = new ol.control.Attribution({
   collapsible: false,
@@ -930,15 +928,10 @@ var bottomAttribution = new ol.control.Attribution({
 });
 map.addControl(bottomAttribution);
 
-var attributionList = document.createElement('li');
-attributionList.innerHTML = `
-	<a href="https://github.com/qgis2web/qgis2web">qgis2web</a> &middot;
-	<a href="https://openlayers.org/">OpenLayers</a> &middot;
-	<a href="https://qgis.org/">QGIS</a>	
-`;
-var bottomAttributionUl = bottomAttribution.element.querySelector('ul');
-if (bottomAttributionUl) {
-  bottomAttribution.element.insertBefore(attributionList, bottomAttributionUl);
+//attribution
+var attributionControl = document.getElementsByClassName('bottom-attribution')[0];
+if (attributionControl) {
+    bottomRightContainerDiv.appendChild(attributionControl); // <--- CHANGED TO BOTTOM-RIGHT CONTAINER
 }
 
 
@@ -963,41 +956,105 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 });
 
+// --- START OF SEARCH FUNCTIONALITY CODE ---
 
-//move controls inside containers, in order
-    //zoom
-    var zoomControl = document.getElementsByClassName('ol-zoom')[0];
-    if (zoomControl) {
-        topLeftContainerDiv.appendChild(zoomControl);
+// Get references to your search elements
+const searchInput = document.getElementById('notamSearch');
+const searchButton = document.getElementById('searchButton');
+const clearSearchButton = document.getElementById('clearSearch');
+
+// Define an array of your searchable NOTAM layers.
+// These are the layer variables defined in layers/layers.js
+const searchableNotamLayers = [
+    lyr_G5Poly_3,
+    lyr_G5Lines_4,
+    lyr_G5Points_5,
+    lyr_G4Poly_6,
+    lyr_G4Lines_7,
+    lyr_G4Points_8,
+    lyr_G3Poly_9,
+    lyr_G3Points_10,
+    lyr_G2Poly_11,
+    lyr_G2Lines_12,
+    lyr_G2Points_13,
+    lyr_G1Poly_14,
+    lyr_G1Lines_15
+];
+
+// Store initial features for each source using a Map
+const allNotamFeaturesBySource = new Map();
+
+// Function to populate allNotamFeaturesBySource for a given layer
+function populateOriginalFeatures(notamLayer) {
+    const source = notamLayer.getSource();
+    if (source) { // Ensure source exists
+        if (source.getState() === 'ready' && source.getFeatures().length > 0) {
+            // If source is already ready and has features, store them
+            allNotamFeaturesBySource.set(source, source.getFeatures());
+            console.log(`Initial load for ${notamLayer.get('title') || 'Unnamed Layer'}: ${source.getFeatures().length} features.`);
+        } else {
+            // Otherwise, wait for the 'change' event to ensure features are loaded
+            source.once('change', function() {
+                if (source.getState() === 'ready' && source.getFeatures().length > 0) {
+                    allNotamFeaturesBySource.set(source, source.getFeatures());
+                    console.log(`Deferred load for ${notamLayer.get('title') || 'Unnamed Layer'}: ${source.getFeatures().length} features.`);
+                } else {
+                    console.warn(`Source for ${notamLayer.get('title') || 'Unnamed Layer'} became ready but had no features or failed to load on change event.`);
+                }
+            });
+        }
+    } else {
+        console.warn(`Layer ${notamLayer.get('title') || 'Unnamed Layer'} has no source.`);
     }
-    //geolocate
-    var geolocateControl = document.getElementsByClassName('geolocate')[0];
-    if (geolocateControl) {
-        topLeftContainerDiv.appendChild(geolocateControl);
-    }
-    //measure
-    var measureControl = document.getElementsByClassName('measure-control')[0];
-    if (measureControl) {
-        topLeftContainerDiv.appendChild(measureControl);
-    }
-    //geocoder
-    var geocoderControl = document.getElementsByClassName('ol-geocoder')[0];
-    if (geocoderControl) {
-        topLeftContainerDiv.appendChild(geocoderControl);
-    }
-    //search layer
-    var searchLayerControl = document.getElementsByClassName('search-layer')[0];
-    if (searchLayerControl) {
-        topLeftContainerDiv.appendChild(searchLayerControl);
-    }
-    //scale line
-    var scaleLineControl = document.getElementsByClassName('ol-scale-line')[0];
-    if (scaleLineControl) {
-        scaleLineControl.className += ' ol-control';
-        bottomLeftContainerDiv.appendChild(scaleLineControl);
-    }
-    //attribution
-    var attributionControl = document.getElementsByClassName('bottom-attribution')[0];
-    if (attributionControl) {
-        bottomRightContainerDiv.appendChild(attributionControl);
-    }
+}
+
+// Iterate through layers to populate original features when the map loads
+// Adding a small delay or ensuring this runs after DOMContentLoaded might also help
+document.addEventListener('DOMContentLoaded', function() {
+    searchableNotamLayers.forEach(populateOriginalFeatures);
+});
+
+
+function filterNotams() {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+
+    searchableNotamLayers.forEach(notamLayer => {
+        const source = notamLayer.getSource();
+        const originalFeatures = allNotamFeaturesBySource.get(source);
+
+        if (!originalFeatures) {
+            console.warn('Original features not yet loaded or stored for:', notamLayer.get('title') || 'Unnamed Layer', '. Cannot filter this layer yet.');
+            return; // Skip this layer if its original features haven't been stored yet
+        }
+
+        source.clear(); // IMPORTANT: Always clear the current features first
+
+        if (searchTerm === '') {
+            // If the search term is empty, add ALL original features back to the source
+            source.addFeatures(originalFeatures);
+            console.log(`Cleared search for ${notamLayer.get('title') || 'Unnamed Layer'}. Added back ${originalFeatures.length} features.`);
+        } else {
+            // If there's a search term, filter features from the ORIGINAL set
+            const filteredFeatures = originalFeatures.filter(function(feature) {
+                const notamText = feature.get('description') || ''; // Confirmed 'description' field
+                return notamText.toLowerCase().includes(searchTerm);
+            });
+            source.addFeatures(filteredFeatures);
+            console.log(`Searched "${searchTerm}" in ${notamLayer.get('title') || 'Unnamed Layer'}. Found ${filteredFeatures.length} features.`);
+        }
+    });
+
+    // Optional: Force the map to re-render. Sometimes necessary if changes aren't immediately visible.
+    // Uncomment the line below if you still experience visual issues after filtering/clearing.
+    // map.render(); // Requires 'map' variable to be in scope, which it is in qgis2web.js
+}
+
+// Event Listeners
+searchButton.addEventListener('click', filterNotams);
+clearSearchButton.addEventListener('click', function() {
+    searchInput.value = ''; // Clear the input field
+    filterNotams(); // Re-run filter to show all NOTAMs
+});
+
+// Optional: Live search as user types (can be performance intensive for many NOTAMs)
+// searchInput.addEventListener('input', filterNotams);

@@ -22,7 +22,7 @@ var wms_layers = [];
             
             
             source: new ol.source.XYZ({
-            attributions: ' ',
+            attributions: ' &nbsp &middot; <a href="https://www.google.com/maps">Google Satellite</a>',
                 url: 'http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}'
             })
         });
@@ -34,7 +34,7 @@ var wms_layers = [];
             
             
             source: new ol.source.XYZ({
-            attributions: ' ',
+            attributions: '© OpenStreetMap contributors',
                 url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
             })
         });
