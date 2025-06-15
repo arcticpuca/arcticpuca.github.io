@@ -9,7 +9,7 @@ var map = new ol.Map({
 });
 
 //initial view - epsg:3857 coordinates if not "Match project CRS"
-map.getView().fit([-5203301.633879, -3070867.531495, 18473784.909808, 13385686.008374], map.getSize());
+map.getView().fit([-5684568.360976, 1953128.380917, 11427534.701772, 10181405.150851], map.getSize());
 
 ////small screen definition
     var hasTouchScreen = map.getViewport().classList.contains('ol-touch');
@@ -448,11 +448,11 @@ var bottomRightContainerDiv = document.getElementById('bottom-right-container')
 var Title = new ol.control.Control({
     element: (() => {
         var titleElement = document.createElement('div');
-        titleElement.className = 'bottom-right-title ol-control';
+        titleElement.className = 'top-left-title ol-control';
         titleElement.innerHTML = '<h2 class="project-title">Archived NOTAMs: Educational Demo (NOT FOR FLIGHT)</h2>';
         return titleElement;
     })(),
-    target: 'bottom-right-container'
+    target: 'top-left-container'
 });
 map.addControl(Title)
     
@@ -999,6 +999,7 @@ document.addEventListener('DOMContentLoaded', function() {
         bottomRightContainerDiv.appendChild(attributionControl);
     }
 	
+	
 	// --- START OF SEARCH FUNCTIONALITY CODE ---
 
 // Get references to your search elements
@@ -1009,19 +1010,9 @@ const clearSearchButton = document.getElementById('clearSearch');
 // Define an array of your searchable NOTAM layers.
 // These are the layer variables defined in layers/layers.js
 const searchableNotamLayers = [
-    lyr_G5Poly_4,   // Corrected suffix
-    lyr_G5Lines_5,  // Corrected suffix
-    lyr_G5Points_6, // Corrected suffix
-    lyr_G4Poly_7,   // Corrected suffix
-    lyr_G4Lines_8,  // Corrected suffix
-    lyr_G4Points_9, // Corrected suffix
-    lyr_G3Poly_10,  // Corrected suffix
-    lyr_G3Points_11, // Corrected suffix
-    lyr_G2Poly_12,  // Corrected suffix
-    lyr_G2Lines_13, // Corrected suffix
-    lyr_G2Points_14, // Corrected suffix
-    lyr_G1Poly_15,  // Corrected suffix
-    lyr_G1Lines_16  // Corrected suffix
+    lyr_G3Poly_4,  // Corrected suffix
+    lyr_G2Lines_5, // Corrected suffix
+    lyr_G2Points_6, // Corrected suffix
 ];
 
 // Store initial features for each source using a Map
