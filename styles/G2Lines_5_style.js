@@ -21,7 +21,7 @@ var style_G2Lines_5 = function(feature, resolution){
         labelText = String("");
     }
     var style = [ new ol.style.Style({
-        stroke: new ol.style.Stroke({color: 'rgba(133,0,0,1.0)', lineDash: [3.04,6.08], lineCap: 'round', lineJoin: 'round', width: 3.04}),
+        stroke: new ol.style.Stroke({color: 'rgba(133,0,0,1.0)', lineDash: [1.9,3.8], lineCap: 'round', lineJoin: 'round', width: 1.9}),
         text: createTextStyle(feature, resolution, labelText, labelFont,
                               labelFill, placement, bufferColor,
                               bufferWidth)
