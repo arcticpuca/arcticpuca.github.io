@@ -48,63 +48,81 @@ var wms_layers = [];
                 url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
             })
         });
-var format_G3Poly_4 = new ol.format.GeoJSON();
-var features_G3Poly_4 = format_G3Poly_4.readFeatures(json_G3Poly_4, 
+var format_Experimental_4 = new ol.format.GeoJSON();
+var features_Experimental_4 = format_Experimental_4.readFeatures(json_Experimental_4, 
             {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857'});
-var jsonSource_G3Poly_4 = new ol.source.Vector({
+var jsonSource_Experimental_4 = new ol.source.Vector({
     attributions: ' ',
 });
-jsonSource_G3Poly_4.addFeatures(features_G3Poly_4);
-var lyr_G3Poly_4 = new ol.layer.Vector({
+jsonSource_Experimental_4.addFeatures(features_Experimental_4);
+var lyr_Experimental_4 = new ol.layer.Vector({
                 declutter: false,
-                source:jsonSource_G3Poly_4, 
-                style: style_G3Poly_4,
+                source:jsonSource_Experimental_4, 
+                style: style_Experimental_4,
+                popuplayertitle: 'Experimental',
+                interactive: true,
+                title: '<img src="styles/legend/Experimental_4.png" /> Experimental'
+            });
+var format_G3Poly_5 = new ol.format.GeoJSON();
+var features_G3Poly_5 = format_G3Poly_5.readFeatures(json_G3Poly_5, 
+            {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857'});
+var jsonSource_G3Poly_5 = new ol.source.Vector({
+    attributions: ' ',
+});
+jsonSource_G3Poly_5.addFeatures(features_G3Poly_5);
+var lyr_G3Poly_5 = new ol.layer.Vector({
+                declutter: false,
+                source:jsonSource_G3Poly_5, 
+                style: style_G3Poly_5,
                 popuplayertitle: 'G3 Poly',
                 interactive: true,
-                title: '<img src="styles/legend/G3Poly_4.png" /> G3 Poly'
+                title: '<img src="styles/legend/G3Poly_5.png" /> G3 Poly'
             });
-var format_G2Lines_5 = new ol.format.GeoJSON();
-var features_G2Lines_5 = format_G2Lines_5.readFeatures(json_G2Lines_5, 
+var format_G2Lines_6 = new ol.format.GeoJSON();
+var features_G2Lines_6 = format_G2Lines_6.readFeatures(json_G2Lines_6, 
             {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857'});
-var jsonSource_G2Lines_5 = new ol.source.Vector({
+var jsonSource_G2Lines_6 = new ol.source.Vector({
     attributions: ' ',
 });
-jsonSource_G2Lines_5.addFeatures(features_G2Lines_5);
-var lyr_G2Lines_5 = new ol.layer.Vector({
+jsonSource_G2Lines_6.addFeatures(features_G2Lines_6);
+var lyr_G2Lines_6 = new ol.layer.Vector({
                 declutter: false,
-                source:jsonSource_G2Lines_5, 
-                style: style_G2Lines_5,
+                source:jsonSource_G2Lines_6, 
+                style: style_G2Lines_6,
                 popuplayertitle: 'G2 Lines',
                 interactive: true,
-                title: '<img src="styles/legend/G2Lines_5.png" /> G2 Lines'
+                title: '<img src="styles/legend/G2Lines_6.png" /> G2 Lines'
             });
-var format_G2Points_6 = new ol.format.GeoJSON();
-var features_G2Points_6 = format_G2Points_6.readFeatures(json_G2Points_6, 
+var format_G2Points_7 = new ol.format.GeoJSON();
+var features_G2Points_7 = format_G2Points_7.readFeatures(json_G2Points_7, 
             {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857'});
-var jsonSource_G2Points_6 = new ol.source.Vector({
+var jsonSource_G2Points_7 = new ol.source.Vector({
     attributions: ' ',
 });
-jsonSource_G2Points_6.addFeatures(features_G2Points_6);
-var lyr_G2Points_6 = new ol.layer.Vector({
+jsonSource_G2Points_7.addFeatures(features_G2Points_7);
+var lyr_G2Points_7 = new ol.layer.Vector({
                 declutter: false,
-                source:jsonSource_G2Points_6, 
-                style: style_G2Points_6,
+                source:jsonSource_G2Points_7, 
+                style: style_G2Points_7,
                 popuplayertitle: 'G2 Points',
                 interactive: true,
-                title: '<img src="styles/legend/G2Points_6.png" /> G2 Points'
+                title: '<img src="styles/legend/G2Points_7.png" /> G2 Points'
             });
 
-lyr_YandexSatprojectionerror_0.setVisible(false);lyr_GESatellite_1.setVisible(false);lyr_Sentinel2Cloudless_2.setVisible(false);lyr_OpenStreetMap_3.setVisible(true);lyr_G3Poly_4.setVisible(true);lyr_G2Lines_5.setVisible(true);lyr_G2Points_6.setVisible(true);
-var layersList = [lyr_YandexSatprojectionerror_0,lyr_GESatellite_1,lyr_Sentinel2Cloudless_2,lyr_OpenStreetMap_3,lyr_G3Poly_4,lyr_G2Lines_5,lyr_G2Points_6];
-lyr_G3Poly_4.set('fieldAliases', {'id': 'id', 'Name': 'Name', 'description': 'description', 'timestamp': 'timestamp', 'begin': 'begin', 'end': 'end', 'altitudeMode': 'altitudeMode', 'tessellate': 'tessellate', 'extrude': 'extrude', 'visibility': 'visibility', 'drawOrder': 'drawOrder', 'icon': 'icon', });
-lyr_G2Lines_5.set('fieldAliases', {'id': 'id', 'Name': 'Name', 'description': 'description', 'timestamp': 'timestamp', 'begin': 'begin', 'end': 'end', 'altitudeMode': 'altitudeMode', 'tessellate': 'tessellate', 'extrude': 'extrude', 'visibility': 'visibility', 'drawOrder': 'drawOrder', 'icon': 'icon', });
-lyr_G2Points_6.set('fieldAliases', {'id': 'id', 'Name': 'Name', 'description': 'description', 'timestamp': 'timestamp', 'begin': 'begin', 'end': 'end', 'altitudeMode': 'altitudeMode', 'tessellate': 'tessellate', 'extrude': 'extrude', 'visibility': 'visibility', 'drawOrder': 'drawOrder', 'icon': 'icon', });
-lyr_G3Poly_4.set('fieldImages', {'id': 'TextEdit', 'Name': 'TextEdit', 'description': 'TextEdit', 'timestamp': 'DateTime', 'begin': 'DateTime', 'end': 'DateTime', 'altitudeMode': 'TextEdit', 'tessellate': 'Range', 'extrude': 'Range', 'visibility': 'Range', 'drawOrder': 'Range', 'icon': 'TextEdit', });
-lyr_G2Lines_5.set('fieldImages', {'id': 'TextEdit', 'Name': 'TextEdit', 'description': 'TextEdit', 'timestamp': 'DateTime', 'begin': 'DateTime', 'end': 'DateTime', 'altitudeMode': 'TextEdit', 'tessellate': 'Range', 'extrude': 'Range', 'visibility': 'Range', 'drawOrder': 'Range', 'icon': 'TextEdit', });
-lyr_G2Points_6.set('fieldImages', {'id': 'TextEdit', 'Name': 'TextEdit', 'description': 'TextEdit', 'timestamp': 'DateTime', 'begin': 'DateTime', 'end': 'DateTime', 'altitudeMode': 'TextEdit', 'tessellate': 'Range', 'extrude': 'Range', 'visibility': 'Range', 'drawOrder': 'Range', 'icon': 'TextEdit', });
-lyr_G3Poly_4.set('fieldLabels', {'id': 'hidden field', 'Name': 'no label', 'description': 'no label', 'timestamp': 'hidden field', 'begin': 'hidden field', 'end': 'hidden field', 'altitudeMode': 'hidden field', 'tessellate': 'hidden field', 'extrude': 'hidden field', 'visibility': 'hidden field', 'drawOrder': 'hidden field', 'icon': 'hidden field', });
-lyr_G2Lines_5.set('fieldLabels', {'id': 'hidden field', 'Name': 'no label', 'description': 'no label', 'timestamp': 'hidden field', 'begin': 'hidden field', 'end': 'hidden field', 'altitudeMode': 'hidden field', 'tessellate': 'hidden field', 'extrude': 'hidden field', 'visibility': 'hidden field', 'drawOrder': 'hidden field', 'icon': 'hidden field', });
-lyr_G2Points_6.set('fieldLabels', {'id': 'hidden field', 'Name': 'no label', 'description': 'no label', 'timestamp': 'hidden field', 'begin': 'hidden field', 'end': 'hidden field', 'altitudeMode': 'hidden field', 'tessellate': 'hidden field', 'extrude': 'hidden field', 'visibility': 'hidden field', 'drawOrder': 'hidden field', 'icon': 'hidden field', });
-lyr_G2Points_6.on('precompose', function(evt) {
+lyr_YandexSatprojectionerror_0.setVisible(false);lyr_GESatellite_1.setVisible(false);lyr_Sentinel2Cloudless_2.setVisible(false);lyr_OpenStreetMap_3.setVisible(true);lyr_Experimental_4.setVisible(true);lyr_G3Poly_5.setVisible(true);lyr_G2Lines_6.setVisible(true);lyr_G2Points_7.setVisible(true);
+var layersList = [lyr_YandexSatprojectionerror_0,lyr_GESatellite_1,lyr_Sentinel2Cloudless_2,lyr_OpenStreetMap_3,lyr_Experimental_4,lyr_G3Poly_5,lyr_G2Lines_6,lyr_G2Points_7];
+lyr_Experimental_4.set('fieldAliases', {'id': 'id', 'Name': 'Name', 'description': 'description', 'timestamp': 'timestamp', 'begin': 'begin', 'end': 'end', 'altitudeMode': 'altitudeMode', 'tessellate': 'tessellate', 'extrude': 'extrude', 'visibility': 'visibility', 'drawOrder': 'drawOrder', 'icon': 'icon', });
+lyr_G3Poly_5.set('fieldAliases', {'id': 'id', 'Name': 'Name', 'description': 'description', 'timestamp': 'timestamp', 'begin': 'begin', 'end': 'end', 'altitudeMode': 'altitudeMode', 'tessellate': 'tessellate', 'extrude': 'extrude', 'visibility': 'visibility', 'drawOrder': 'drawOrder', 'icon': 'icon', });
+lyr_G2Lines_6.set('fieldAliases', {'id': 'id', 'Name': 'Name', 'description': 'description', 'timestamp': 'timestamp', 'begin': 'begin', 'end': 'end', 'altitudeMode': 'altitudeMode', 'tessellate': 'tessellate', 'extrude': 'extrude', 'visibility': 'visibility', 'drawOrder': 'drawOrder', 'icon': 'icon', });
+lyr_G2Points_7.set('fieldAliases', {'id': 'id', 'Name': 'Name', 'description': 'description', 'timestamp': 'timestamp', 'begin': 'begin', 'end': 'end', 'altitudeMode': 'altitudeMode', 'tessellate': 'tessellate', 'extrude': 'extrude', 'visibility': 'visibility', 'drawOrder': 'drawOrder', 'icon': 'icon', });
+lyr_Experimental_4.set('fieldImages', {'id': 'TextEdit', 'Name': 'TextEdit', 'description': 'TextEdit', 'timestamp': 'DateTime', 'begin': 'DateTime', 'end': 'DateTime', 'altitudeMode': 'TextEdit', 'tessellate': 'Range', 'extrude': 'Range', 'visibility': 'Range', 'drawOrder': 'Range', 'icon': 'TextEdit', });
+lyr_G3Poly_5.set('fieldImages', {'id': 'TextEdit', 'Name': 'TextEdit', 'description': 'TextEdit', 'timestamp': 'DateTime', 'begin': 'DateTime', 'end': 'DateTime', 'altitudeMode': 'TextEdit', 'tessellate': 'Range', 'extrude': 'Range', 'visibility': 'Range', 'drawOrder': 'Range', 'icon': 'TextEdit', });
+lyr_G2Lines_6.set('fieldImages', {'id': 'TextEdit', 'Name': 'TextEdit', 'description': 'TextEdit', 'timestamp': 'DateTime', 'begin': 'DateTime', 'end': 'DateTime', 'altitudeMode': 'TextEdit', 'tessellate': 'Range', 'extrude': 'Range', 'visibility': 'Range', 'drawOrder': 'Range', 'icon': 'TextEdit', });
+lyr_G2Points_7.set('fieldImages', {'id': 'TextEdit', 'Name': 'TextEdit', 'description': 'TextEdit', 'timestamp': 'DateTime', 'begin': 'DateTime', 'end': 'DateTime', 'altitudeMode': 'TextEdit', 'tessellate': 'Range', 'extrude': 'Range', 'visibility': 'Range', 'drawOrder': 'Range', 'icon': 'TextEdit', });
+lyr_Experimental_4.set('fieldLabels', {'id': 'hidden field', 'Name': 'no label', 'description': 'no label', 'timestamp': 'hidden field', 'begin': 'hidden field', 'end': 'hidden field', 'altitudeMode': 'hidden field', 'tessellate': 'hidden field', 'extrude': 'hidden field', 'visibility': 'hidden field', 'drawOrder': 'hidden field', 'icon': 'hidden field', });
+lyr_G3Poly_5.set('fieldLabels', {'id': 'hidden field', 'Name': 'no label', 'description': 'no label', 'timestamp': 'hidden field', 'begin': 'hidden field', 'end': 'hidden field', 'altitudeMode': 'hidden field', 'tessellate': 'hidden field', 'extrude': 'hidden field', 'visibility': 'hidden field', 'drawOrder': 'hidden field', 'icon': 'hidden field', });
+lyr_G2Lines_6.set('fieldLabels', {'id': 'hidden field', 'Name': 'no label', 'description': 'no label', 'timestamp': 'hidden field', 'begin': 'hidden field', 'end': 'hidden field', 'altitudeMode': 'hidden field', 'tessellate': 'hidden field', 'extrude': 'hidden field', 'visibility': 'hidden field', 'drawOrder': 'hidden field', 'icon': 'hidden field', });
+lyr_G2Points_7.set('fieldLabels', {'id': 'hidden field', 'Name': 'no label', 'description': 'no label', 'timestamp': 'hidden field', 'begin': 'hidden field', 'end': 'hidden field', 'altitudeMode': 'hidden field', 'tessellate': 'hidden field', 'extrude': 'hidden field', 'visibility': 'hidden field', 'drawOrder': 'hidden field', 'icon': 'hidden field', });
+lyr_G2Points_7.on('precompose', function(evt) {
     evt.context.globalCompositeOperation = 'normal';
 });

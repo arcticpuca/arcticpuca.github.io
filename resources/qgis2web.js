@@ -9,7 +9,7 @@ var map = new ol.Map({
 });
 
 //initial view - epsg:3857 coordinates if not "Match project CRS"
-map.getView().fit([-62775.604909, 3962500.963111, 7343651.880038, 8076639.348078], map.getSize());
+map.getView().fit([-4856284.938999, 2595045.261063, 9956570.030895, 10823322.030997], map.getSize());
 
 ////small screen definition
     var hasTouchScreen = map.getViewport().classList.contains('ol-touch');
@@ -998,7 +998,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (attributionControl) {
         bottomRightContainerDiv.appendChild(attributionControl);
     }
-			// --- START OF SEARCH FUNCTIONALITY CODE ---
+	
+				// --- START OF SEARCH FUNCTIONALITY CODE ---
 
 // Get references to your search elements
 const searchInput = document.getElementById('notamSearch');
@@ -1008,10 +1009,12 @@ const clearSearchButton = document.getElementById('clearSearch');
 // Define an array of your searchable NOTAM layers.
 // These are the layer variables defined in layers/layers.js
 const searchableNotamLayers = [
-    lyr_G3Poly_4,  // Corrected suffix
-    lyr_G2Lines_5, // Corrected suffix
-    lyr_G2Points_6, // Corrected suffix
+    lyr_Experimental_4, // New
+	lyr_G3Poly_5,  // Corrected suffix
+    lyr_G2Lines_6, // Corrected suffix
+    lyr_G2Points_7, // Corrected suffix
 ];
+
 
 // Store initial features for each source using a Map
 const allNotamFeaturesBySource = new Map();
