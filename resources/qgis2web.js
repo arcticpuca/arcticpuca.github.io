@@ -9,7 +9,7 @@ var map = new ol.Map({
 });
 
 //initial view - epsg:3857 coordinates if not "Match project CRS"
-map.getView().fit([-12620437.001117, -929459.066576, 17005272.938671, 15527094.473292], map.getSize());
+map.getView().fit([-62775.604909, 3962500.963111, 7343651.880038, 8076639.348078], map.getSize());
 
 ////small screen definition
     var hasTouchScreen = map.getViewport().classList.contains('ol-touch');
@@ -998,8 +998,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (attributionControl) {
         bottomRightContainerDiv.appendChild(attributionControl);
     }
-	
-		// --- START OF SEARCH FUNCTIONALITY CODE ---
+			// --- START OF SEARCH FUNCTIONALITY CODE ---
 
 // Get references to your search elements
 const searchInput = document.getElementById('notamSearch');
