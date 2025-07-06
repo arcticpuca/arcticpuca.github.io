@@ -109,7 +109,7 @@ var lyr_G2Points_7 = new ol.layer.Vector({
                 title: '<img src="styles/legend/G2Points_7.png" /> G2 Points'
             });
 
-lyr_YandexSatprojectionerror_0.setVisible(false);lyr_GESatellite_1.setVisible(false);lyr_Sentinel2Cloudless_2.setVisible(false);lyr_OpenStreetMap_3.setVisible(true);lyr_Experimental_4.setVisible(true);lyr_G3Poly_5.setVisible(true);lyr_G2Lines_6.setVisible(true);lyr_G2Points_7.setVisible(true);
+lyr_YandexSatprojectionerror_0.setVisible(false);lyr_GESatellite_1.setVisible(false);lyr_Sentinel2Cloudless_2.setVisible(false);lyr_OpenStreetMap_3.setVisible(true);lyr_Experimental_4.setVisible(false);lyr_G3Poly_5.setVisible(true);lyr_G2Lines_6.setVisible(true);lyr_G2Points_7.setVisible(true);
 var layersList = [lyr_YandexSatprojectionerror_0,lyr_GESatellite_1,lyr_Sentinel2Cloudless_2,lyr_OpenStreetMap_3,lyr_Experimental_4,lyr_G3Poly_5,lyr_G2Lines_6,lyr_G2Points_7];
 lyr_Experimental_4.set('fieldAliases', {'id': 'id', 'Name': 'Name', 'description': 'description', 'timestamp': 'timestamp', 'begin': 'begin', 'end': 'end', 'altitudeMode': 'altitudeMode', 'tessellate': 'tessellate', 'extrude': 'extrude', 'visibility': 'visibility', 'drawOrder': 'drawOrder', 'icon': 'icon', });
 lyr_G3Poly_5.set('fieldAliases', {'id': 'id', 'Name': 'Name', 'description': 'description', 'timestamp': 'timestamp', 'begin': 'begin', 'end': 'end', 'altitudeMode': 'altitudeMode', 'tessellate': 'tessellate', 'extrude': 'extrude', 'visibility': 'visibility', 'drawOrder': 'drawOrder', 'icon': 'icon', });
