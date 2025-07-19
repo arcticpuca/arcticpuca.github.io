@@ -9,10 +9,10 @@ var style_Experimental_4 = function(feature, resolution){
     
     var labelText = ""; 
     var value = feature.get("");
-    var labelFont = "10px, sans-serif";
-    var labelFill = "#000000";
-    var bufferColor = "";
-    var bufferWidth = 0;
+    var labelFont = "10.4px \'Open Sans\', sans-serif";
+    var labelFill = "#ffffff";
+    var bufferColor = "#3f0000";
+    var bufferWidth = 1.2000000000000002;
     var textAlign = "left";
     var offsetX = 0;
     var offsetY = 0;
@@ -21,7 +21,7 @@ var style_Experimental_4 = function(feature, resolution){
         labelText = String("");
     }
     var style = [ new ol.style.Style({
-        stroke: new ol.style.Stroke({color: 'rgba(128,14,16,1.0)', lineDash: null, lineCap: 'butt', lineJoin: 'miter', width: 0.76}),fill: new ol.style.Fill({color: 'rgba(228,26,28,0.011764705882352941)'}),
+        stroke: new ol.style.Stroke({color: 'rgba(35,35,35,1.0)', lineDash: null, lineCap: 'butt', lineJoin: 'miter', width: 1.52}),fill: new ol.style.Fill({color: 'rgba(255,68,68,0.0196078431372549)'}),
         text: createTextStyle(feature, resolution, labelText, labelFont,
                               labelFill, placement, bufferColor,
                               bufferWidth)
